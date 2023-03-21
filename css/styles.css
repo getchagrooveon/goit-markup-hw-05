@@ -38,11 +38,13 @@ a {
 
 a:active {
   color: var(--pressed-state-color);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 a:hover,
 a:focus {
   color: var(--pressed-state-color);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 li {
@@ -90,6 +92,22 @@ li {
   padding-top: 24px;
   padding-bottom: 24px;
 }
+
+.nav-item::after {
+  content: '';
+  background-color: var(--primary-brand-color);
+  height: 4px;
+  width: 100%;
+  display: block;
+  border-radius: 2px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  visibility: hidden;
+}
+
+nav-item:hover .nav-item::after {
+  visibility: visible;
+}
+
 .address-container .address-item:not(:last-child) {
   display: flex;
   justify-content: flex-end;
@@ -253,6 +271,7 @@ logo-text-second-section {
 .hero-button:hover,
 .hero-button:focus {
   background-color: var(--pressed-state-color);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .filter-button {
@@ -274,6 +293,7 @@ logo-text-second-section {
 .filter-button:focus {
   color: var(--light-background-color);
   background-color: var(--pressed-state-color);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .visually-hidden {
@@ -283,12 +303,12 @@ logo-text-second-section {
   margin: -1px;
   border: 0;
   padding: 0;
-
   white-space: nowrap;
   clip-path: inset(100%);
   clip: rect(0 0 0 0);
   overflow: hidden;
 }
+
 .section-with-light-wrapper {
   background-color: var(--light-main-color);
   padding-top: 120px;
@@ -376,6 +396,7 @@ logo-text-second-section {
 .social-media-icon:hover,
 .social-media-icon:focus {
   background-color: var(--pressed-state-color);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .what-are-we-doing-list {
@@ -565,12 +586,16 @@ logo-text-second-section {
 .customer-item:focus {
   fill: var(--pressed-state-color);
   border-color: var(--pressed-state-color);
+  transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .customer-item > a:hover,
 .customer-item > a:focus {
   fill: var(--pressed-state-color);
   border-color: var(--pressed-state-color);
+  transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer-social-media {
@@ -594,6 +619,7 @@ logo-text-second-section {
 .social-media-icon-global:hover,
 .social-media-icon-global:focus {
   background-color: var(--success-color);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .social-media-container-global {
@@ -667,7 +693,8 @@ logo-text-second-section {
 
 .footer-link:hover,
 .footer-link:focus {
-  background-color: var(#31d0aa);
+  background-color: var(--success-color);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 footer-link {
@@ -695,4 +722,65 @@ footer-link {
 
 .flex {
   display: flex;
+}
+
+.backdrop {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(157, 164, 189, 0.8);
+  transition: opacity 250ms linear, visibility 250ms linear;
+}
+
+.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.button-close {
+  position: relative;
+  left: -24px;
+  top: 24px;
+  cursor: pointer;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #0000001a;
+  background-color: var(--accent-color);
+  background-size: contain;
+  border-radius: 50%;
+  align-items: center;
+}
+
+.modal-window {
+  position: relative;
+  border-radius: 4px;
+  box-shadow: 1px 0px 2px rgba(0, 0, 0, 0.2), 3px 0px 1px rgba(0, 0, 0, 0.12),
+    1px 0px 1px rgba(0, 0, 0, 0.14);
+  max-width: 408px;
+  min-height: 516px;
+  width: 100%;
+  background-color: var(--modal-background);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.backdrop.is-hidden > .modal-window {
+  transform: translate(-50%, -50%) scale(0.6);
+}
+
+.modal-window > button {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  justify-content: center;
 }
